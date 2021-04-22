@@ -1,0 +1,27 @@
+on: [push]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: test
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Packages
+        run: npm install
+      - name: Get repo owner using bash
+        id: get_repo_owner_bash
+        run: echo ::set-output name=owner::$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')
+      - name: Run action
+        uses: ./ # Uses an action in the root directory
+        id: get_repo_owner
+      # Use the output from the `hello` step
+      - name: Print output
+        run: echo "The owner is ${{ steps.get_repo_owner.outputs.owner }}, should be ${{ steps.get_repo_owner_bash.outputs.owner }}"
+      - uses: Thog/action-equals@v1
+        name: Check output
+        with:
+          a: ${{ steps.get_repo_owner.outputs.owner }}
+          b: ${{ steps.get_repo_owner_bash.outputs.owner }}

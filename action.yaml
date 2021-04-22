@@ -1,0 +1,8 @@
+name: 'Get Repo Owner'
+description: 'Get the repo owner in lower case'
+outputs:
+  owner:
+    description: 'current repo owner in lower case'
+runs:
+  using: 'node12'
+  main: 'index.js'
