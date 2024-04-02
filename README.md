@@ -14,7 +14,7 @@ See https://docs.github.com/en/actions/reference/context-and-expression-syntax-f
 ## Example usage
 
 ```yaml
-- uses: LucasRoesler/get-repo-owner-actions@v1.0
+- uses: LucasRoesler/get-repo-owner-action@v1.0
   id: get_owner
 - name: print owner
   run: echo ${{ steps.get_owner.outputs.owner }}
